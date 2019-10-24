@@ -11,11 +11,15 @@ entity mux is
 end mux;
 
 architecture selecao of mux is
-
-	begin
-    SAIDA <= A  when (SEL = "00")
-			  else B when (SEL = "01") 
-			  else C when (SEL = "10") 
-			  else D ; 
-              
+begin
+    process(SEL) is
+    begin
+      case SEL is
+          when "00" => SAIDA <= A;
+          when "01" => SAIDA <= B;
+          when "10" => SAIDA <= C;
+          when "11" => SAIDA <= D;
+          when others => SAIDA <= "XXXXXXXXXXXXXXXX";
+      end case;
+    end process;                    
 end selecao;
